@@ -134,8 +134,7 @@ public class UpdateService extends Service {
         loadCurrentDateRatesUa();
 
         //load month rates (JSON)
-        daysList.clear();
-        loadMonthRates(getMonthDates());
+        getMonthRates();
     }
 
     //update in selected time
@@ -325,9 +324,10 @@ public class UpdateService extends Service {
         pbApiJSON = retrofit.create(PBApi.class);
     }
 
-    //load last 30 days rates
-    private List<String> getMonthDates() {
+    //get last 30 days rates
+    private void getMonthRates() {
         //initialize last 30 days
+        daysList.clear();
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         for (int i = 0; i < 31; i++) {
             Calendar today = Calendar.getInstance();
@@ -344,53 +344,50 @@ public class UpdateService extends Service {
                 cursor.close();
             }
         }
-        return daysList;
+        for (String day : daysList) {
+            loadMonthRates(day);
+        }
     }
 
     //load last 30 days rates
-    private void loadMonthRates(final List<String> dates) {
-        if (!dates.isEmpty() && dates.size() > 0) {
-            Thread t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        for (String day : dates) {
-                            String date = day;
-                            final DateRates dateRates = pbApiJSON.getDateRates(date).execute().body();
-                            if (pbApiJSON.getDateRates(date).execute().isSuccessful()) {
+    private void loadMonthRates(final String date) {
+        final Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final DateRates dateRates = pbApiJSON.getDateRates(date).execute().body();
+                    if (pbApiJSON.getDateRates(date).execute().isSuccessful()) {
 
-                                for (int i = 0; i < dateRates.getExchangeRate().size(); i++) {
-                                    if (dateRates.getExchangeRate().get(i).getCurrency().equals("USD")
-                                            || dateRates.getExchangeRate().get(i).getCurrency().equals("EUR")) {
-                                        String currency = dateRates.getExchangeRate().get(i).getCurrency();
-                                        String baseCurrency = dateRates.getExchangeRate().get(i).getBaseCurrency();
-                                        float buyNB = dateRates.getExchangeRate().get(i).getPurchaseRateNB();
-                                        float saleNB = dateRates.getExchangeRate().get(i).getSaleRateNB();
-                                        float salePB = dateRates.getExchangeRate().get(i).getSaleRate();
-                                        float buyPB = dateRates.getExchangeRate().get(i).getPurchaseRate();
-                                        addMonthRatesToDB(currency, baseCurrency, buyNB, saleNB, buyPB, salePB, date);
-                                    }
-
-                                }
-                            } else {
-                                Timer retryTimer = new Timer();
-                                retryTimer.schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        loadMonthRates(getMonthDates());
-                                        Log.w("RETRY", "10 MIN PASSED-RETRYING");
-                                    }
-                                }, 600000);
+                        for (int i = 0; i < dateRates.getExchangeRate().size(); i++) {
+                            if (dateRates.getExchangeRate().get(i).getCurrency().equals("USD")
+                                    || dateRates.getExchangeRate().get(i).getCurrency().equals("EUR")) {
+                                String currency = dateRates.getExchangeRate().get(i).getCurrency();
+                                String baseCurrency = dateRates.getExchangeRate().get(i).getBaseCurrency();
+                                float buyNB = dateRates.getExchangeRate().get(i).getPurchaseRateNB();
+                                float saleNB = dateRates.getExchangeRate().get(i).getSaleRateNB();
+                                float salePB = dateRates.getExchangeRate().get(i).getSaleRate();
+                                float buyPB = dateRates.getExchangeRate().get(i).getPurchaseRate();
+                                addMonthRatesToDB(currency, baseCurrency, buyNB, saleNB, buyPB, salePB, date);
                             }
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    } else {
+                        Timer retryTimer = new Timer();
+                        retryTimer.schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                getMonthRates();
+                                Log.w("RETRY", "10 MIN PASSED-RETRYING");
+                            }
+                        }, 600000);
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            });
-            t.start();
-        }
+            }
+        });
+        t.start();
     }
+
 
     //load selected date rates
     public void loadSelectedDateRates() {
@@ -437,18 +434,8 @@ public class UpdateService extends Service {
         values.put(CURRENT_RATES_UNIT_COLUMN, unitRate);
         values.put(CURRENT_RATES_DATE_COLUMN, date);
 
-      /*  Cursor cursor = database.query(TABLE_NAME_CURRENT_RATES, null, null, null, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            database.delete(TABLE_NAME_CURRENT_RATES, null, null);
-//            context.getContentResolver().notifyChange(EventsCursorLoader.SELECTED_DATE_RATES_DB_URI, null);
-        } else {*/
         database.insert(TABLE_NAME_CURRENT_RATES, null, values);
         getContentResolver().notifyChange(CURRENT_DATE_RATES_DB_URI, null);
-
-    /*    }
-        if (cursor != null) {
-            cursor.close();
-        }*/
     }
 
     //storing last 30 days rates
@@ -464,7 +451,6 @@ public class UpdateService extends Service {
 
         database.insert(TABLE_NAME_MONTH_RATES, null, values);
         getContentResolver().notifyChange(MONTH_RATES_DB_URI, null);
-
     }
 
     //storing selected date rates
