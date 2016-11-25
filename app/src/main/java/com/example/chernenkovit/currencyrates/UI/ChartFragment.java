@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.chernenkovit.currencyrates.R;
 import com.example.chernenkovit.currencyrates.data.DBHelper;
+import com.example.chernenkovit.currencyrates.loaders.ChartLoader;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -37,7 +40,9 @@ import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_MO
 import static java.lang.Float.parseFloat;
 
 /** Fragment with charting implementation. */
-public class ChartFragment extends Fragment {
+public class ChartFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private static final int CHART_CURSOR_LOADER = 103;
+
     LineChart chart;
     DBHelper dbHelper;
     SQLiteDatabase database;
@@ -64,26 +69,14 @@ public class ChartFragment extends Fragment {
         database = dbHelper.getWritableDatabase();
         mapUSD = new HashMap<>();
         mapEUR = new HashMap<>();
+        chart = (LineChart) view.findViewById(R.id.chart);
 
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         //check for records in database
         Cursor cursor = database.query(TABLE_NAME_MONTH_RATES, null, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
-
-            //load, convert and sort currency rates for the last 30 days term
-            loadSortUsdData();
-            loadSortEurData();
-
-            //chart initialize
-            chart = (LineChart) view.findViewById(R.id.chart);
-            LineData data = new LineData(getDataSet());
-            chart.setData(data);
-            chart.animateXY(1000, 1000);
-            chart.getXAxis().setEnabled(false);
-            chart.setDescription(null);
-            chart.invalidate();
-
+            getActivity().getSupportLoaderManager().initLoader(CHART_CURSOR_LOADER, null, this);
         }
         if (cursor != null) {
             cursor.close();
@@ -91,8 +84,8 @@ public class ChartFragment extends Fragment {
     }
 
     //load, convert and sort USD currency rates for the last 30 days term
-    private void loadSortUsdData() {
-        Cursor cursor = database.query(TABLE_NAME_MONTH_RATES, null, MONTH_RATES_CURRENCY_COLUMN + "=?", new String[]{"USD"}, null, null, null);
+    private void loadSortUsdData(Cursor cursor) {
+        cursor = database.query(TABLE_NAME_MONTH_RATES, null, MONTH_RATES_CURRENCY_COLUMN + "=?", new String[]{"USD"}, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             while (cursor.moveToNext()) {
                 Date date = null;
@@ -128,8 +121,8 @@ public class ChartFragment extends Fragment {
     }
 
     //load, convert and sort EUR currency rates for the last 30 days term
-    private void loadSortEurData() {
-        Cursor cursor = database.query(TABLE_NAME_MONTH_RATES, null, MONTH_RATES_CURRENCY_COLUMN + "=?", new String[]{"EUR"}, null, null, null);
+    private void loadSortEurData(Cursor cursor) {
+        cursor = database.query(TABLE_NAME_MONTH_RATES, null, MONTH_RATES_CURRENCY_COLUMN + "=?", new String[]{"EUR"}, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
             while (cursor.moveToNext()) {
                 Date date = null;
@@ -198,5 +191,35 @@ public class ChartFragment extends Fragment {
             Toast.makeText(getActivity(), "No data records loaded", Toast.LENGTH_LONG).show();
             return null;
         }
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+            case CHART_CURSOR_LOADER:
+                return new ChartLoader(getActivity(), database);
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        //load, convert and sort currency rates for the last 30 days term
+        loadSortUsdData(cursor);
+        loadSortEurData(cursor);
+
+        //chart initialize
+        LineData data = new LineData(getDataSet());
+        chart.setData(data);
+        chart.animateXY(1000, 1000);
+        chart.getXAxis().setEnabled(false);
+        chart.setDescription(null);
+        chart.invalidate();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+
     }
 }

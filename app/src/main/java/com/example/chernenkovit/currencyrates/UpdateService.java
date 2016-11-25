@@ -65,6 +65,7 @@ import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATE
 import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_CURRENT_RATES;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_MONTH_RATES;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_SELECTED_RATES;
+import static com.example.chernenkovit.currencyrates.loaders.ChartLoader.MONTH_RATES_DB_URI;
 import static com.example.chernenkovit.currencyrates.loaders.CurrentRatesCursorLoader.CURRENT_DATE_RATES_DB_URI;
 import static com.example.chernenkovit.currencyrates.utils.Const.NOTIFICATION_ICON_ID;
 import static com.example.chernenkovit.currencyrates.utils.Const.NOTIFICATION_ID_CURRENT_RATES;
@@ -460,6 +461,8 @@ public class UpdateService extends Service {
         values.put(MONTH_RATES_DATE_COLUMN, date);
 
         database.insert(TABLE_NAME_MONTH_RATES, null, values);
+        getContentResolver().notifyChange(MONTH_RATES_DB_URI, null);
+
     }
 
     //storing selected date rates
