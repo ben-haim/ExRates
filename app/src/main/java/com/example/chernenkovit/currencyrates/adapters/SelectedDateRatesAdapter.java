@@ -18,7 +18,7 @@ import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATE
 import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_SALE_NB_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_SALE_PB_COLUMN;
 
-/** Custom adapter for data presenting. */
+/**Custom adapter for data presenting. */
 public class SelectedDateRatesAdapter extends CursorAdapter {
     String selectedDate;
 
@@ -47,11 +47,13 @@ public class SelectedDateRatesAdapter extends CursorAdapter {
         viewHolder.tv_privatBank.setText(R.string.PrBank_title);
         viewHolder.tv_nbu.setText(R.string.NBU_title);
         String salePB = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_SALE_PB_COLUMN));
-        viewHolder.tv_sale_privatBank.setText(salePB);
+        if (salePB.equals("0")) viewHolder.tv_sale_privatBank.setText("-");
+        else viewHolder.tv_sale_privatBank.setText(salePB);
         String saleNB = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_SALE_NB_COLUMN));
         viewHolder.tv_sale_nbu.setText(saleNB);
         String buyPB = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_BUY_PB_COLUMN));
-        viewHolder.tv_buy_privatBank.setText(buyPB);
+        if (buyPB.equals("0")) viewHolder.tv_buy_privatBank.setText("-");
+        else viewHolder.tv_buy_privatBank.setText(buyPB);
         String buyNB = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_BUY_NB_COLUMN));
         viewHolder.tv_buy_nbu.setText(buyNB);
     }
