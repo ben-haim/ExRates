@@ -20,7 +20,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.chernenkovit.currencyrates.UI.MainActivity;
-import com.example.chernenkovit.currencyrates.api.CallbackWithRetry;
 import com.example.chernenkovit.currencyrates.api.PBApi;
 import com.example.chernenkovit.currencyrates.data.DBHelper;
 import com.example.chernenkovit.currencyrates.loaders.SelectedDateRatesCursorLoader;
@@ -38,6 +37,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -171,7 +171,7 @@ public class UpdateService extends Service {
     public void loadCurrentDateRatesRu() {
 
         //get current date rates for "ru"
-        pbApiXML.getCurrentRates("ru").enqueue(new CallbackWithRetry<CurrentRates>(pbApiXML.getCurrentRates("ru")) {
+        pbApiXML.getCurrentRates("ru").enqueue(new Callback<CurrentRates>(){
             @Override
             public void onResponse(final Call<CurrentRates> call, Response<CurrentRates> response) {
                 CurrentRates currentRates = response.body();
@@ -226,7 +226,7 @@ public class UpdateService extends Service {
 
     public void loadCurrentDateRatesUa() {
         //get current date rates for "ua"
-        pbApiXML.getCurrentRates("ua").enqueue(new CallbackWithRetry<CurrentRates>(pbApiXML.getCurrentRates("ua")) {
+        pbApiXML.getCurrentRates("ua").enqueue(new Callback<CurrentRates>(){
             @Override
             public void onResponse(Call<CurrentRates> call, Response<CurrentRates> response) {
                 CurrentRates currentRates = response.body();
