@@ -186,12 +186,14 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
             dataSets.add(barDataSet2);
 
         }
-        if (!dataSets.isEmpty()) return dataSets;
-        else {
-            Toast.makeText(getActivity(), "No data records loaded", Toast.LENGTH_LONG).show();
-            return null;
+        if (dataSets != null)
+            return dataSets;
+            else {
+                Toast.makeText(getActivity(), "No data records loaded", Toast.LENGTH_LONG).show();
+                return null;
+            }
         }
-    }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

@@ -134,6 +134,7 @@ public class UpdateService extends Service {
         loadCurrentDateRatesUa();
 
         //load month rates (JSON)
+        daysList.clear();
         loadMonthRates(getMonthDates());
     }
 
@@ -326,8 +327,6 @@ public class UpdateService extends Service {
 
     //load last 30 days rates
     private List<String> getMonthDates() {
-        daysList.clear();
-
         //initialize last 30 days
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         for (int i = 0; i < 31; i++) {
@@ -336,58 +335,61 @@ public class UpdateService extends Service {
             String day = dateFormat.format(today.getTime());
             daysList.add(day);
         }
-        Cursor cursor = database.query(TABLE_NAME_MONTH_RATES, null, null, null, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            database.delete(TABLE_NAME_MONTH_RATES, null, null);
+        if (isOnline()) {
+            Cursor cursor = database.query(TABLE_NAME_MONTH_RATES, null, null, null, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                database.delete(TABLE_NAME_MONTH_RATES, null, null);
+            }
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        if (cursor != null) {
-            cursor.close();
-        }
-
         return daysList;
     }
 
     //load last 30 days rates
     private void loadMonthRates(final List<String> dates) {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    for (String day : dates) {
-                        String date = day;
-                        final DateRates dateRates = pbApiJSON.getDateRates(date).execute().body();
-                        if (pbApiJSON.getDateRates(date).execute().isSuccessful()) {
+        if (!dates.isEmpty() && dates.size() > 0) {
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        for (String day : dates) {
+                            String date = day;
+                            final DateRates dateRates = pbApiJSON.getDateRates(date).execute().body();
+                            if (pbApiJSON.getDateRates(date).execute().isSuccessful()) {
 
-                            for (int i = 0; i < dateRates.getExchangeRate().size(); i++) {
-                                if (dateRates.getExchangeRate().get(i).getCurrency().equals("USD")
-                                        || dateRates.getExchangeRate().get(i).getCurrency().equals("EUR")) {
-                                    String currency = dateRates.getExchangeRate().get(i).getCurrency();
-                                    String baseCurrency = dateRates.getExchangeRate().get(i).getBaseCurrency();
-                                    float buyNB = dateRates.getExchangeRate().get(i).getPurchaseRateNB();
-                                    float saleNB = dateRates.getExchangeRate().get(i).getSaleRateNB();
-                                    float salePB = dateRates.getExchangeRate().get(i).getSaleRate();
-                                    float buyPB = dateRates.getExchangeRate().get(i).getPurchaseRate();
-                                    addMonthRatesToDB(currency, baseCurrency, buyNB, saleNB, buyPB, salePB, date);
+                                for (int i = 0; i < dateRates.getExchangeRate().size(); i++) {
+                                    if (dateRates.getExchangeRate().get(i).getCurrency().equals("USD")
+                                            || dateRates.getExchangeRate().get(i).getCurrency().equals("EUR")) {
+                                        String currency = dateRates.getExchangeRate().get(i).getCurrency();
+                                        String baseCurrency = dateRates.getExchangeRate().get(i).getBaseCurrency();
+                                        float buyNB = dateRates.getExchangeRate().get(i).getPurchaseRateNB();
+                                        float saleNB = dateRates.getExchangeRate().get(i).getSaleRateNB();
+                                        float salePB = dateRates.getExchangeRate().get(i).getSaleRate();
+                                        float buyPB = dateRates.getExchangeRate().get(i).getPurchaseRate();
+                                        addMonthRatesToDB(currency, baseCurrency, buyNB, saleNB, buyPB, salePB, date);
+                                    }
+
                                 }
-
+                            } else {
+                                Timer retryTimer = new Timer();
+                                retryTimer.schedule(new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        loadMonthRates(getMonthDates());
+                                        Log.w("RETRY", "10 MIN PASSED-RETRYING");
+                                    }
+                                }, 600000);
                             }
-                        } else {
-                            Timer retryTimer = new Timer();
-                            retryTimer.schedule(new TimerTask() {
-                                @Override
-                                public void run() {
-                                    loadMonthRates(getMonthDates());
-                                    Log.w("RETRY", "10 MIN PASSED-RETRYING");
-                                }
-                            }, 600000);
                         }
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-            }
-        });
-        t.start();
+            });
+            t.start();
+        }
     }
 
     //load selected date rates
