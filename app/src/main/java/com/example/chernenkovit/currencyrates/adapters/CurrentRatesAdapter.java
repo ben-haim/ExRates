@@ -14,7 +14,6 @@ import com.example.chernenkovit.currencyrates.R;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BASE_CURRENCY_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BUY_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_CURRENCY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_DATE_COLUMN;
 
 /**Custom adapter for data presenting. */
 public class CurrentRatesAdapter extends CursorAdapter {
@@ -37,8 +36,8 @@ public class CurrentRatesAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
-        String date = cursor.getString(cursor.getColumnIndex(CURRENT_RATES_DATE_COLUMN));
-        viewHolder.tv_current_date.setText(date);
+//        String date = cursor.getString(cursor.getColumnIndex(CURRENT_RATES_DATE_COLUMN));
+//        viewHolder.tv_current_date.setText(date);
         String currency = cursor.getString(cursor.getColumnIndex(CURRENT_RATES_CURRENCY_COLUMN));
         viewHolder.tv_currency_current_date.setText("1 " + currency);
         String bank = cursor.getString(cursor.getColumnIndex(CURRENT_RATES_BASE_CURRENCY_COLUMN));
@@ -66,13 +65,13 @@ public class CurrentRatesAdapter extends CursorAdapter {
 
     private static class ViewHolder {
         final TextView tv_currency_current_date;
-        final TextView tv_current_date;
+//        final TextView tv_current_date;
         final TextView tv_bank;
         final TextView tv_buy;
 
         ViewHolder(View view) {
             tv_currency_current_date = (TextView) view.findViewById(R.id.tv_currency_current_date);
-            tv_current_date = (TextView) view.findViewById(R.id.tv_current_date);
+//            tv_current_date = (TextView) view.findViewById(R.id.tv_current_date);
             tv_bank = (TextView) view.findViewById(R.id.tv_bank);
             tv_buy = (TextView) view.findViewById(R.id.tv_buy);
 

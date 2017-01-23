@@ -47,10 +47,10 @@ public class CurrentRatesFragment extends Fragment implements LoaderManager.Load
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         currentRateslistView = (ListView) view.findViewById(R.id.lv_current_rates);
-        LayoutInflater inflater = getLayoutInflater(null);
+        /*LayoutInflater inflater = getLayoutInflater(null);
         ViewGroup header = (ViewGroup) inflater.inflate(R.layout.header_current_rates, currentRateslistView,
                 false);
-        currentRateslistView.addHeaderView(header, null, false);
+        currentRateslistView.addHeaderView(header, null, false);*/
 
         dbHelper = new DBHelper(getActivity());
         database = dbHelper.getWritableDatabase();

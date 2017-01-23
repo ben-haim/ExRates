@@ -5,9 +5,13 @@
     android:orientation="vertical"
     tools:context="com.example.chernenkovit.currencyrates.UI.CurrentRatesFragment">
 
+    <include layout="@layout/header_current_rates" />
+
     <ListView
         android:id="@+id/lv_current_rates"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:background="@color/indigo_light"/>
 
 </LinearLayout>

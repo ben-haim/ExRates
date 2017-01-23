@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
+import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BASE_CURRENCY_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_CURRENT_RATES;
 
 /** Cursor loader for downloading current date rates. */
@@ -26,8 +27,8 @@ public class CurrentRatesCursorLoader extends CursorLoader {
     public Cursor loadInBackground() {
         Cursor cursor = database.query(TABLE_NAME_CURRENT_RATES,
                 null,
-                null,
-                null,
+                CURRENT_RATES_BASE_CURRENCY_COLUMN+"=?",
+                new String[]{"UA"},
                 null,
                 null,
                 null);
