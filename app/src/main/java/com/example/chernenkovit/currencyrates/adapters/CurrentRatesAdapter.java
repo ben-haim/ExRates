@@ -15,7 +15,9 @@ import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES
 import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BUY_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_CURRENCY_COLUMN;
 
-/**Custom adapter for data presenting. */
+/**
+ * Custom adapter for data presenting.
+ */
 public class CurrentRatesAdapter extends CursorAdapter {
     private float rate;
     private String convertedRate;
@@ -59,13 +61,21 @@ public class CurrentRatesAdapter extends CursorAdapter {
         } else if (currency.equals(context.getString(R.string.USD_title)) && bank.equals(context.getString(R.string.UA_title))) {
             rate = rawRate / 1000000;
             convertedRate = rate + " UAH";
+        } else if (currency.equals("XAU") && bank.equals("UA")) {
+            viewHolder.tv_currency_current_date.setText("1 t.o. GOLD");
+            rate = rawRate / 10000;
+            convertedRate = rate + " UAH";
+        } else if (currency.equals("XAG") && bank.equals("UA")) {
+            viewHolder.tv_currency_current_date.setText("1 t.o. SILVER");
+            rate = rawRate / 10000;
+            convertedRate = rate + " UAH";
         }
         viewHolder.tv_buy.setText(convertedRate);
     }
 
     private static class ViewHolder {
         final TextView tv_currency_current_date;
-//        final TextView tv_current_date;
+        //        final TextView tv_current_date;
         final TextView tv_bank;
         final TextView tv_buy;
 

@@ -11,7 +11,7 @@ import retrofit2.http.Query;
 /** RESTful services description. */
 public interface PBApi {
 
-    @GET("p24/accountorder?oper=prp&PUREXML&apicour")
+    @GET("p24/accountorder?oper=prp&PUREXML&apicour&country&full")
     Call<CurrentRates> getCurrentRates(@Query("country") String country);
 
     @GET("p24api/exchange_rates?json")

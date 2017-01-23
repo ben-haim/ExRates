@@ -130,7 +130,7 @@ public class UpdateService extends Service {
 
     public void update() {
         //load current rates (XML)
-        loadCurrentDateRatesRu();
+//        loadCurrentDateRatesRu();
         loadCurrentDateRatesUa();
 
         //load month rates (JSON)
@@ -233,13 +233,13 @@ public class UpdateService extends Service {
                 if (response.isSuccessful()) {
                     Cursor cursor = database.query(TABLE_NAME_CURRENT_RATES,
                             null,
-                            CURRENT_RATES_BASE_CURRENCY_COLUMN + "=?",
-                            new String[]{"UA"},
+                            null,
+                            null,
                             null,
                             null,
                             null);
                     if (cursor != null && cursor.moveToFirst()) {
-                        database.delete(TABLE_NAME_CURRENT_RATES, CURRENT_RATES_BASE_CURRENCY_COLUMN + "=?", new String[]{"UA"});
+                        database.delete(TABLE_NAME_CURRENT_RATES, null, null);
                         getContentResolver().notifyChange(CURRENT_DATE_RATES_DB_URI, null);
                     }
                     if (cursor != null) {
