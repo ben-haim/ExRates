@@ -18,7 +18,9 @@ import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATE
 import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_SALE_NB_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_SALE_PB_COLUMN;
 
-/**Custom adapter for data presenting. */
+/**
+ * Custom adapter for data presenting.
+ */
 public class SelectedDateRatesAdapter extends CursorAdapter {
     String selectedDate;
 
@@ -44,6 +46,11 @@ public class SelectedDateRatesAdapter extends CursorAdapter {
         viewHolder.tv_currency_selected_date.setText(date);
         String currency = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_CURRENCY_COLUMN));
         viewHolder.tv_currency.setText("1 " + currency);
+        if (currency.equals("USD") || currency.equals("EUR") || currency.equals("RUB")) {
+            viewHolder.eventsListRow.setBackgroundColor(context.getResources().getColor(R.color.indigo_light));
+        } else {
+            viewHolder.eventsListRow.setBackgroundColor(context.getResources().getColor(R.color.white));
+        }
         viewHolder.tv_privatBank.setText(R.string.PrBank_title);
         viewHolder.tv_nbu.setText(R.string.NBU_title);
         String salePB = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_SALE_PB_COLUMN));
@@ -67,6 +74,7 @@ public class SelectedDateRatesAdapter extends CursorAdapter {
         final TextView tv_buy_privatBank;
         final TextView tv_buy_nbu;
         final TextView tv_currency;
+        final View eventsListRow;
 
         ViewHolder(View view) {
             tv_currency_selected_date = (TextView) view.findViewById(R.id.tv_currency_selected_date);
@@ -77,6 +85,7 @@ public class SelectedDateRatesAdapter extends CursorAdapter {
             tv_buy_privatBank = (TextView) view.findViewById(R.id.tv_buy_privatBank);
             tv_buy_nbu = (TextView) view.findViewById(R.id.tv_buy_nbu);
             tv_currency = (TextView) view.findViewById(R.id.tv_currency);
+            eventsListRow = (View) view.findViewById(R.id.eventsListRow);
         }
     }
 }

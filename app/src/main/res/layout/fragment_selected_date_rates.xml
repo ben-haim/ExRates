@@ -9,6 +9,7 @@
         android:id="@+id/lv_selected_date_rates"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/indigo_light"
         android:divider="@null" />
 
     <android.support.design.widget.FloatingActionButton
@@ -20,6 +21,6 @@
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
         android:clickable="true"
-        android:src="@android:drawable/arrow_down_float"
+        android:src="@drawable/ic_add_white_24dp"
         app:elevation="4dp" />
 </RelativeLayout>

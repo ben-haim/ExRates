@@ -14,7 +14,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -75,7 +77,9 @@ import static com.example.chernenkovit.currencyrates.utils.Const.SELECTED_TIME_M
 import static com.example.chernenkovit.currencyrates.utils.Const.SHARED_PREF_SELECTED_DATE;
 import static com.example.chernenkovit.currencyrates.utils.Utils.getNotificationIcon;
 
-/** Main app service for loading and storing data. */
+/**
+ * Main app service for loading and storing data.
+ */
 public class UpdateService extends Service {
     MyBinder binder = new MyBinder();
     private static final String CURRENT_RATE_URL = "https://privat24.privatbank.ua/";
@@ -171,7 +175,7 @@ public class UpdateService extends Service {
     public void loadCurrentDateRatesRu() {
 
         //get current date rates for "ru"
-        pbApiXML.getCurrentRates("ru").enqueue(new Callback<CurrentRates>(){
+        pbApiXML.getCurrentRates("ru").enqueue(new Callback<CurrentRates>() {
             @Override
             public void onResponse(final Call<CurrentRates> call, Response<CurrentRates> response) {
                 CurrentRates currentRates = response.body();
@@ -226,7 +230,7 @@ public class UpdateService extends Service {
 
     public void loadCurrentDateRatesUa() {
         //get current date rates for "ua"
-        pbApiXML.getCurrentRates("ua").enqueue(new Callback<CurrentRates>(){
+        pbApiXML.getCurrentRates("ua").enqueue(new Callback<CurrentRates>() {
             @Override
             public void onResponse(Call<CurrentRates> call, Response<CurrentRates> response) {
                 CurrentRates currentRates = response.body();
@@ -398,16 +402,29 @@ public class UpdateService extends Service {
                     String date = sharedPreferences.getString(SELECTED_DATE, "");
                     final DateRates dateRates = pbApiJSON.getDateRates(date).execute().body();
                     if (pbApiJSON.getDateRates(date).execute().isSuccessful()) {
-                        for (int i = 0; i < dateRates.getExchangeRate().size(); i++) {
-                            String currency = dateRates.getExchangeRate().get(i).getCurrency();
-                            String baseCurrency = dateRates.getExchangeRate().get(i).getBaseCurrency();
-                            float buyNB = dateRates.getExchangeRate().get(i).getPurchaseRateNB();
-                            float saleNB = dateRates.getExchangeRate().get(i).getSaleRateNB();
-                            float salePB = dateRates.getExchangeRate().get(i).getSaleRate();
-                            float buyPB = dateRates.getExchangeRate().get(i).getPurchaseRate();
-                            addSelectedDateRatesToDB(currency, baseCurrency, buyNB, saleNB, salePB, buyPB, date);
+                        if (dateRates.getExchangeRate().size() != 0) {
+                            for (int i = 0; i < dateRates.getExchangeRate().size(); i++) {
+                                String currency = dateRates.getExchangeRate().get(i).getCurrency();
+                                String baseCurrency = dateRates.getExchangeRate().get(i).getBaseCurrency();
+                                float buyNB = dateRates.getExchangeRate().get(i).getPurchaseRateNB();
+                                float saleNB = dateRates.getExchangeRate().get(i).getSaleRateNB();
+                                float salePB = dateRates.getExchangeRate().get(i).getSaleRate();
+                                float buyPB = dateRates.getExchangeRate().get(i).getPurchaseRate();
+                                addSelectedDateRatesToDB(currency, baseCurrency, buyNB, saleNB, salePB, buyPB, date);
+                            }
+                        } else {
+                            Handler handler = new Handler(Looper.getMainLooper());
+
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "No information for selected date", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
+
                     } else {
+                        Toast.makeText(UpdateService.this, "No data", Toast.LENGTH_LONG).show();
                         Timer retryTimer = new Timer();
                         retryTimer.schedule(new TimerTask() {
                             @Override
