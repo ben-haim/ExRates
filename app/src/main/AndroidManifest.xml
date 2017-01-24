@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chernenkovit.ExRates">
+    package="com.apps.chernenkovit.ExRates">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.chernenkovit.ExRates.UI.MainActivity">
+        <activity android:name="com.apps.chernenkovit.ExRates.UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,12 +20,12 @@
         </activity>
 
         <service
-            android:name="com.example.chernenkovit.ExRates.UpdateService"
+            android:name="com.apps.chernenkovit.ExRates.UpdateService"
             android:enabled="true"
             android:exported="true" />
 
         <receiver
-            android:name="com.example.chernenkovit.ExRates.BootCompletedIntentReceiver"
+            android:name="com.apps.chernenkovit.ExRates.BootCompletedIntentReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -34,7 +34,7 @@
         </receiver>
 
         <service
-            android:name="com.example.chernenkovit.ExRates.HideNotificationService"
+            android:name="com.apps.chernenkovit.ExRates.HideNotificationService"
             android:enabled="true"
             android:exported="true"></service>
 

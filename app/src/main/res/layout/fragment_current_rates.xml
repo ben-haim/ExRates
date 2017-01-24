@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.chernenkovit.ExRates.UI.CurrentRatesFragment">
+    tools:context="com.apps.chernenkovit.ExRates.UI.CurrentRatesFragment">
 
     <include layout="@layout/header_current_rates" />
 
