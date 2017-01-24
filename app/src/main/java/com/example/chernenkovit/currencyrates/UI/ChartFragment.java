@@ -33,9 +33,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_BUY_PB_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_CURRENCY_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_DATE_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_SALE_PB_COLUMN;
 import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_MONTH_RATES;
 import static java.lang.Float.parseFloat;
 
@@ -94,7 +94,7 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                String rate = cursor.getString(cursor.getColumnIndex(MONTH_RATES_SALE_PB_COLUMN));
+                String rate = cursor.getString(cursor.getColumnIndex(MONTH_RATES_BUY_PB_COLUMN));
                 mapUSD.put(date, rate);
             }
 
@@ -131,7 +131,7 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                String rate = cursor.getString(cursor.getColumnIndex(MONTH_RATES_SALE_PB_COLUMN));
+                String rate = cursor.getString(cursor.getColumnIndex(MONTH_RATES_BUY_PB_COLUMN));
                 mapEUR.put(date, rate);
             }
 
@@ -176,8 +176,8 @@ public class ChartFragment extends Fragment implements LoaderManager.LoaderCallb
                 valueSet2.add(v1e1);
             }
 
-            LineDataSet barDataSet1 = new LineDataSet(valueSet1, "PivatBank USD sale's rate for last 30 days");
-            LineDataSet barDataSet2 = new LineDataSet(valueSet2, "PivatBank EUR sale's rate for last 30 days");
+            LineDataSet barDataSet1 = new LineDataSet(valueSet1, "PrBank USD sale's rate(last 30d)");
+            LineDataSet barDataSet2 = new LineDataSet(valueSet2, "PrBank EUR sale's rate(last 30d)");
             barDataSet1.setColor(Color.GREEN);
             barDataSet2.setColor(Color.MAGENTA);
 

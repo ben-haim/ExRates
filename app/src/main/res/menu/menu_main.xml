@@ -11,12 +11,12 @@
         android:visible="true"
         tools:ignore="AppCompatResource" />
 
-    <item
+    <!--<item
         android:id="@+id/menu_update_now"
         android:checkable="false"
         android:checked="false"
         android:showAsAction="ifRoom"
         android:title="@string/update_now"
         android:visible="true"
-        tools:ignore="AppCompatResource" />
+        tools:ignore="AppCompatResource" />-->
    </menu>

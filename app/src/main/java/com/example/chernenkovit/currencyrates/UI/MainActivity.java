@@ -17,6 +17,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TimePicker;
 
 import com.example.chernenkovit.currencyrates.R;
@@ -34,6 +36,7 @@ import static com.example.chernenkovit.currencyrates.utils.Const.SHARED_PREF_SEL
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private ImageButton refresh;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private boolean bound = false;
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setLogo(R.mipmap.ic_launcher);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
@@ -76,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(SHARED_PREF_SELECTED_DATE, Context.MODE_PRIVATE);
         hour = sharedPreferences.getInt(SELECTED_TIME_HOUR, 9);
         minute = sharedPreferences.getInt(SELECTED_TIME_MINUTE, 00);
+
+        refresh= (ImageButton) findViewById(R.id.refresh_view);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updateService.update();
+            }
+        });
+
     }
 
     public UpdateService getService() {
@@ -142,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
                 }, hour, minute, true);
                 timePickerDialog.show();
                 return true;
-            case R.id.menu_update_now:
+           /* case R.id.menu_update_now:
                 updateService.update();
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }

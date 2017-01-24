@@ -47,9 +47,9 @@ public class SelectedDateRatesAdapter extends CursorAdapter {
         String currency = cursor.getString(cursor.getColumnIndex(SELECTED_RATES_CURRENCY_COLUMN));
         viewHolder.tv_currency.setText("1 " + currency);
         if (currency.equals("USD") || currency.equals("EUR") || currency.equals("RUB")) {
-            viewHolder.eventsListRow.setBackgroundColor(context.getResources().getColor(R.color.indigo_light));
-        } else {
             viewHolder.eventsListRow.setBackgroundColor(context.getResources().getColor(R.color.white));
+        } else {
+            viewHolder.eventsListRow.setBackgroundColor(context.getResources().getColor(R.color.indigo_light));
         }
         viewHolder.tv_privatBank.setText(R.string.PrBank_title);
         viewHolder.tv_nbu.setText(R.string.NBU_title);

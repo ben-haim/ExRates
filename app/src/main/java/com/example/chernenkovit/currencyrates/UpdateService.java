@@ -302,14 +302,15 @@ public class UpdateService extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
 
         builder.setContentIntent(contentIntent)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText("100 USD" + " - " + usdCurrentRate + " - " + currentRatesDate +
-                        " \n100 EUR" + " - " + eurCurrentRate + " - " + currentRatesDate))
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText("100 USD" + " - " + usdCurrentRate + /*" - " + currentRatesDate +*/
+                        " \n100 EUR" + " - " + eurCurrentRate /*+ " - " + currentRatesDate*/))
+                .setSmallIcon(R.drawable.ic_attach_money_white_48dp)
+                .setColor(getResources().getColor(R.color.colorPrimary))
                 .setAutoCancel(true)
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setContentTitle("NBU currency rates")
-                .setContentText("100 USD" + " - " + usdCurrentRate + " - " + currentRatesDate +
-                        "\n100 EUR" + " - " + eurCurrentRate + " - " + currentRatesDate)
+                .setContentTitle("NBU exchange rates today:")
+                .setContentText("100 USD" + " - " + usdCurrentRate + /*" - " + currentRatesDate +*/
+                        "\n100 EUR" + " - " + eurCurrentRate /*+ " - " + currentRatesDate*/)
                 .setDefaults(Notification.DEFAULT_ALL);
 
         Notification notification = builder.build();

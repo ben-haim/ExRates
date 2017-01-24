@@ -1,14 +1,14 @@
 <resources>
-    <string name="app_name">CurrencyRates</string>
+    <string name="app_name">ExRates</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_time">Update time</string>
     <string name="header_currency">Currency</string>
     <string name="header_bank">Bank</string>
-    <string name="header_sale_rate">Sale</string>
-    <string name="header_buy_rate">Buy</string>
-    <string name="header_nat_bank">Nat Bank</string>
+    <string name="header_sale_rate">Sale,UAH</string>
+    <string name="header_buy_rate">Buy,UAH</string>
+    <string name="header_current_bank">Bank</string>
     <string name="header_buy_current_rates">Buy rate</string>
     <string name="tab_title_current_rates">CURRENT</string>
     <string name="tab_title_selected_day_rates">SELECTED</string>
@@ -20,4 +20,5 @@
     <string name="NBU_title">NBU</string>
     <string name="PrBank_title">PrBank</string>
     <string name="update_now">Update now</string>
+    <string name="NBU">NBU</string>
 </resources>
