@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates;
+package com.example.chernenkovit.ExRates;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.chernenkovit.currencyrates", appContext.getPackageName());
+        assertEquals("com.example.chernenkovit.ExRates", appContext.getPackageName());
     }
 }

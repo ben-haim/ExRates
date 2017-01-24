@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.UI;
+package com.example.chernenkovit.ExRates.UI;
 
 
 import android.app.DatePickerDialog;
@@ -17,15 +17,15 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.chernenkovit.currencyrates.R;
-import com.example.chernenkovit.currencyrates.adapters.SelectedDateRatesAdapter;
-import com.example.chernenkovit.currencyrates.data.DBHelper;
-import com.example.chernenkovit.currencyrates.loaders.SelectedDateRatesCursorLoader;
+import com.example.chernenkovit.ExRates.R;
+import com.example.chernenkovit.ExRates.adapters.SelectedDateRatesAdapter;
+import com.example.chernenkovit.ExRates.data.DBHelper;
+import com.example.chernenkovit.ExRates.loaders.SelectedDateRatesCursorLoader;
 
 import java.util.Calendar;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_DATE_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_SELECTED_RATES;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_DATE_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.TABLE_NAME_SELECTED_RATES;
 
 
 /** Fragment for selected date rates with loader implementation. */

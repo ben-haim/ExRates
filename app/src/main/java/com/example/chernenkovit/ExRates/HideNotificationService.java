@@ -1,11 +1,11 @@
-package com.example.chernenkovit.currencyrates;
+package com.example.chernenkovit.ExRates;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import static com.example.chernenkovit.currencyrates.utils.Const.NOTIFICATION_ICON_ID;
-import static com.example.chernenkovit.currencyrates.utils.Utils.getNotificationIcon;
+import static com.example.chernenkovit.ExRates.utils.Const.NOTIFICATION_ICON_ID;
+import static com.example.chernenkovit.ExRates.utils.Utils.getNotificationIcon;
 
 /** Service class for hiding notification of foreground class. */
 public class HideNotificationService extends Service {

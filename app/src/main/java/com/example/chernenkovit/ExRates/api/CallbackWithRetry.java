@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.api;
+package com.example.chernenkovit.ExRates.api;
 
 import android.os.Handler;
 

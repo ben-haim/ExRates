@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.adapters;
+package com.example.chernenkovit.ExRates.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.chernenkovit.currencyrates.R;
+import com.example.chernenkovit.ExRates.R;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BASE_CURRENCY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BUY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_CURRENCY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.CURRENT_RATES_BASE_CURRENCY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.CURRENT_RATES_BUY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.CURRENT_RATES_CURRENCY_COLUMN;
 
 /**
  * Custom adapter for data presenting.

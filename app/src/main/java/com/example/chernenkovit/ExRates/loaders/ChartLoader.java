@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.loaders;
+package com.example.chernenkovit.ExRates.loaders;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,15 +7,15 @@ import android.net.Uri;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_MONTH_RATES;
-import static com.example.chernenkovit.currencyrates.loaders.CurrentRatesCursorLoader.CURRENT_DATE_RATES_DB_URI;
+import static com.example.chernenkovit.ExRates.data.DBHelper.TABLE_NAME_MONTH_RATES;
+import static com.example.chernenkovit.ExRates.loaders.CurrentRatesCursorLoader.CURRENT_DATE_RATES_DB_URI;
 
 /** Cursor loader for downloading data for chart. */
 public class ChartLoader extends CursorLoader {
     private SQLiteDatabase database;
     private Cursor cursor;
     final Loader.ForceLoadContentObserver observer;
-    public static final Uri MONTH_RATES_DB_URI = Uri.parse("sqlite://com.example.chernenkovit.currencyrates/Month_rates");
+    public static final Uri MONTH_RATES_DB_URI = Uri.parse("sqlite://com.example.chernenkovit.ExRates/Month_rates");
 
     public ChartLoader(Context context, SQLiteDatabase database) {
         super(context);

@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.loaders;
+package com.example.chernenkovit.ExRates.loaders;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -7,16 +7,16 @@ import android.net.Uri;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_BASE_CURRENCY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.CURRENT_RATES_CURRENCY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_CURRENT_RATES;
+import static com.example.chernenkovit.ExRates.data.DBHelper.CURRENT_RATES_BASE_CURRENCY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.CURRENT_RATES_CURRENCY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.TABLE_NAME_CURRENT_RATES;
 
 /** Cursor loader for downloading current date rates. */
 public class CurrentRatesCursorLoader extends CursorLoader {
     private SQLiteDatabase database;
     private Cursor cursor;
     final Loader.ForceLoadContentObserver observer;
-    public static final Uri CURRENT_DATE_RATES_DB_URI = Uri.parse("sqlite://com.example.chernenkovit.currencyrates/Current_rates");
+    public static final Uri CURRENT_DATE_RATES_DB_URI = Uri.parse("sqlite://com.example.chernenkovit.ExRates/Current_rates");
 
     public CurrentRatesCursorLoader(Context context, SQLiteDatabase database) {
         super(context);

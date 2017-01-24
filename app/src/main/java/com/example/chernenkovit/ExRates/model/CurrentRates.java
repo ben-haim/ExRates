@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.model;
+package com.example.chernenkovit.ExRates.model;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;

@@ -1,8 +1,8 @@
-package com.example.chernenkovit.currencyrates.api;
+package com.example.chernenkovit.ExRates.api;
 
 
-import com.example.chernenkovit.currencyrates.model.CurrentRates;
-import com.example.chernenkovit.currencyrates.model.DateRates;
+import com.example.chernenkovit.ExRates.model.CurrentRates;
+import com.example.chernenkovit.ExRates.model.DateRates;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

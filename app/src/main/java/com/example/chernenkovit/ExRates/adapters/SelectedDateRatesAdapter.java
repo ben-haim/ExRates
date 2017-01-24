@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.adapters;
+package com.example.chernenkovit.ExRates.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,14 +9,14 @@ import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.chernenkovit.currencyrates.R;
+import com.example.chernenkovit.ExRates.R;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_BUY_NB_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_BUY_PB_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_CURRENCY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_DATE_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_SALE_NB_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_SALE_PB_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_BUY_NB_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_BUY_PB_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_CURRENCY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_DATE_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_SALE_NB_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_SALE_PB_COLUMN;
 
 /**
  * Custom adapter for data presenting.

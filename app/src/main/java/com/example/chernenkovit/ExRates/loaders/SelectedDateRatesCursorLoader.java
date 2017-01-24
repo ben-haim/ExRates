@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.loaders;
+package com.example.chernenkovit.ExRates.loaders;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.v4.content.CursorLoader;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.SELECTED_RATES_DATE_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_SELECTED_RATES;
+import static com.example.chernenkovit.ExRates.data.DBHelper.SELECTED_RATES_DATE_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.TABLE_NAME_SELECTED_RATES;
 
 /** Cursor loader for downloading selected date rates. */
 public class SelectedDateRatesCursorLoader extends CursorLoader {
@@ -16,7 +16,7 @@ public class SelectedDateRatesCursorLoader extends CursorLoader {
     private Cursor cursor;
     String selectedDate;
     final ForceLoadContentObserver observer;
-    public static final Uri SELECTED_DATE_RATES_DB_URI = Uri.parse("sqlite://com.example.chernenkovit.currencyrates/Selected_rates");
+    public static final Uri SELECTED_DATE_RATES_DB_URI = Uri.parse("sqlite://com.example.chernenkovit.ExRates/Selected_rates");
 
     public SelectedDateRatesCursorLoader(Context context, SQLiteDatabase database,String selectedDate) {
         super(context);

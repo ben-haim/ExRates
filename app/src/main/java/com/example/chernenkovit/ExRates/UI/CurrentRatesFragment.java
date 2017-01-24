@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.UI;
+package com.example.chernenkovit.ExRates.UI;
 
 
 import android.database.Cursor;
@@ -14,12 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.chernenkovit.currencyrates.R;
-import com.example.chernenkovit.currencyrates.adapters.CurrentRatesAdapter;
-import com.example.chernenkovit.currencyrates.data.DBHelper;
-import com.example.chernenkovit.currencyrates.loaders.CurrentRatesCursorLoader;
+import com.example.chernenkovit.ExRates.R;
+import com.example.chernenkovit.ExRates.adapters.CurrentRatesAdapter;
+import com.example.chernenkovit.ExRates.data.DBHelper;
+import com.example.chernenkovit.ExRates.loaders.CurrentRatesCursorLoader;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_CURRENT_RATES;
+import static com.example.chernenkovit.ExRates.data.DBHelper.TABLE_NAME_CURRENT_RATES;
 
 /** Fragment for current rates with loader implementation. */
 public class CurrentRatesFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {

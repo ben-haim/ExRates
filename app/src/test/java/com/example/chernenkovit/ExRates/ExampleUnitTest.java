@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates;
+package com.example.chernenkovit.ExRates;
 
 import org.junit.Test;
 

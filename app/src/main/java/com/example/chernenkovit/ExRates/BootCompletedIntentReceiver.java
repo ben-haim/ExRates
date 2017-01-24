@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates;
+package com.example.chernenkovit.ExRates;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

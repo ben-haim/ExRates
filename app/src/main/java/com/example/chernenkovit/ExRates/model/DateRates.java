@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.model;
+package com.example.chernenkovit.ExRates.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

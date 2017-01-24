@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.UI;
+package com.example.chernenkovit.ExRates.UI;
 
 
 import android.database.Cursor;
@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.chernenkovit.currencyrates.R;
-import com.example.chernenkovit.currencyrates.data.DBHelper;
-import com.example.chernenkovit.currencyrates.loaders.ChartLoader;
+import com.example.chernenkovit.ExRates.R;
+import com.example.chernenkovit.ExRates.data.DBHelper;
+import com.example.chernenkovit.ExRates.loaders.ChartLoader;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -33,10 +33,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_BUY_PB_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_CURRENCY_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.MONTH_RATES_DATE_COLUMN;
-import static com.example.chernenkovit.currencyrates.data.DBHelper.TABLE_NAME_MONTH_RATES;
+import static com.example.chernenkovit.ExRates.data.DBHelper.MONTH_RATES_BUY_PB_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.MONTH_RATES_CURRENCY_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.MONTH_RATES_DATE_COLUMN;
+import static com.example.chernenkovit.ExRates.data.DBHelper.TABLE_NAME_MONTH_RATES;
 import static java.lang.Float.parseFloat;
 
 /** Fragment with charting implementation. */

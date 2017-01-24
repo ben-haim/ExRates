@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.utils;
+package com.example.chernenkovit.ExRates.utils;
 
 /** Constants class. */
 public class Const {

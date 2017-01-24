@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.UI;
+package com.example.chernenkovit.ExRates.UI;
 
 import android.app.TimePickerDialog;
 import android.content.ComponentName;
@@ -21,16 +21,16 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 
-import com.example.chernenkovit.currencyrates.R;
-import com.example.chernenkovit.currencyrates.UpdateService;
+import com.example.chernenkovit.ExRates.R;
+import com.example.chernenkovit.ExRates.UpdateService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.chernenkovit.currencyrates.utils.Const.SELECTED_DATE;
-import static com.example.chernenkovit.currencyrates.utils.Const.SELECTED_TIME_HOUR;
-import static com.example.chernenkovit.currencyrates.utils.Const.SELECTED_TIME_MINUTE;
-import static com.example.chernenkovit.currencyrates.utils.Const.SHARED_PREF_SELECTED_DATE;
+import static com.example.chernenkovit.ExRates.utils.Const.SELECTED_DATE;
+import static com.example.chernenkovit.ExRates.utils.Const.SELECTED_TIME_HOUR;
+import static com.example.chernenkovit.ExRates.utils.Const.SELECTED_TIME_MINUTE;
+import static com.example.chernenkovit.ExRates.utils.Const.SHARED_PREF_SELECTED_DATE;
 
 /** Main activity class with service connection, tabs attachment and menu implementation. */
 public class MainActivity extends AppCompatActivity {

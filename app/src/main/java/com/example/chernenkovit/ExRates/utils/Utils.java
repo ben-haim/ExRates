@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.utils;
+package com.example.chernenkovit.ExRates.utils;
 
 
 import android.app.Notification;
@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
-import com.example.chernenkovit.currencyrates.R;
-import com.example.chernenkovit.currencyrates.UI.MainActivity;
+import com.example.chernenkovit.ExRates.R;
+import com.example.chernenkovit.ExRates.UI.MainActivity;
 
 /** Utilities class. */
 public class Utils {

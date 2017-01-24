@@ -1,4 +1,4 @@
-package com.example.chernenkovit.currencyrates.data;
+package com.example.chernenkovit.ExRates.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
