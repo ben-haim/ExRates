@@ -8,4 +8,18 @@ Simple and free application, that shows official exchange rates of the Ukrainian
 
 <p1>Get it on [Google Play] (https://play.google.com/store/apps/details?id=com.apps.chernenkovit.ExRates)</p1>
 
-![alt tag](http://prnt.sc/e0kuwk)
+![img](http://i.imgur.com/jDeYelj.png)  ![](http://i.imgur.com/muxgeB1.png)
+
+![](http://i.imgur.com/28NokSN.png) ![](http://i.imgur.com/LtrV0d8.png)
+
+
+<b>Used Android components and libs:</b>
+- Activities, Fragments, Dialogs;
+- Services:
+- SQLite database;
+- SharedPreferences;
+- CursorLoader;
+- CursorAdapter;
+- Push Notifications;
+- TabLayout, ViewPager;
+- Retrofit with gson and simpleXML converters, MPAndroidChart library.
